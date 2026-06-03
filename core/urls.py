@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/category/', include('category.api.urls')),
     path('api/author/', include('author.api.urls')),
+    path('api/publisher/', include('publisher.api.urls')),
 
 
 

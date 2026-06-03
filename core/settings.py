@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # project apps
     'category',
     'author',
+    'publisher',
 ]
 
 # drf_spectacular

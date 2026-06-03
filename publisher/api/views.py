@@ -23,7 +23,7 @@ class PublisherView(GenericAPIView):
         return Response(serializer.errors, 422)
 
 
-class PublisherUpdate(GenericAPIView):
+class PublisherUpdateAndDelete(GenericAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
 
@@ -35,3 +35,10 @@ class PublisherUpdate(GenericAPIView):
             serializer.save()
             return Response({"message": "Publisher successfully updated!!"}, 200)
         return Response(serializer.errors, 422)
+    
+    def delete(self, request, pk):
+        publisher = Publisher.objects.filter(id=pk)
+        publisher.delete()
+        return Response({
+            'message': "Publisher successfully deleted !!"
+        }, 200)

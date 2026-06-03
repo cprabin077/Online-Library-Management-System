@@ -18,6 +18,7 @@ class Publisher(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = 'publisher'
         verbose_name = "Publisher"
         verbose_name_plural = "Publishers"
         ordering = ['name']

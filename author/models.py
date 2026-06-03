@@ -13,9 +13,11 @@ class Author(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = "author"
         verbose_name = "Author"
         verbose_name_plural = "Authors"
         ordering = ['full_name']
+        
 
     def __str__(self):
         return f'{self.full_name}'

@@ -26,6 +26,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/category/', include('category.api.urls')),
+    path('api/author/', include('author.api.urls')),
+
 
 
     # YOUR PATTERNS

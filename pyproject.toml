@@ -10,4 +10,5 @@ dependencies = [
     "djangorestframework>=3.17.1",
     "drf-spectacular>=0.29.0",
     "pillow>=12.2.0",
+    "qrcode[pil]>=8.2",
 ]

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'author',
     'publisher',
     'book',
+    'member',
 ]
 
 # drf_spectacular

@@ -19,6 +19,7 @@ class MemberAdmin(admin.ModelAdmin):
     readonly_fields = (
         "library_card_no",
         "qr_code",
+        "is_active",
     )
 
     search_fields = (

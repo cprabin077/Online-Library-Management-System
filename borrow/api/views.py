@@ -20,40 +20,59 @@ class BorrowView(GenericAPIView):
         return Response(serializer.data, status=200)
 
     def post(self, request):
+
         serializer = BorrowSerializer(data=request.data)
+
         if serializer.is_valid():
+
             member = serializer.validated_data["member"]
             book = serializer.validated_data["book"]
             issued_by = serializer.validated_data.get("issued_by")
 
-            # LIMIT CHECK (MAX 3 BOOKS)
+            # 🔐 MEMBER APPROVAL CHECK (FIXED)
+            if not member.is_active:
+                return Response(
+                    {"error": "Member is not active (not approved)"},
+                    status=403
+                )
+
+            # 📚 LIMIT CHECK (MAX 3 BOOKS)
             active_count = Borrow.objects.filter(
-                member=member, is_returned=False
+                member=member,
+                is_returned=False
             ).count()
 
             if active_count >= 3:
                 return Response(
-                    {
-                        "error": "Member cannot borrow more than 3 books"
-                        }, status=400)
+                    {"error": "Member cannot borrow more than 3 books"},
+                    status=400
+                )
 
-            # STOCK CHECK
+            # 📦 STOCK CHECK
             if book.available_copies <= 0:
-                return Response({
-                    "error": "Book not available"
-                    }, status=400)
-            # reduce stock
+                return Response(
+                    {"error": "Book not available"},
+                    status=400
+                )
+
+            # ⬇ reduce stock
             book.available_copies -= 1
             book.save()
 
-            # auto due date (7 days)
+            # 📅 due date
             due_date = timezone.now().date() + timedelta(days=7)
-            serializer.save(due_date=due_date, issued_by=issued_by)
-            return Response({
-                "message": "Book borrowed successfully"
-                }, status=201)
-        return Response(serializer.errors, status=422)
 
+            serializer.save(
+                due_date=due_date,
+                issued_by=issued_by
+            )
+
+            return Response(
+                {"message": "Book borrowed successfully"},
+                status=201
+            )
+
+        return Response(serializer.errors, status=422)
 
 # RETURN BOOK API (WITH FINE)
 class ReturnBookView(GenericAPIView):
@@ -101,7 +120,7 @@ class OverdueBooksView(GenericAPIView):
         for borrow in overdue_borrows:
             overdue_days = (today - borrow.due_date).days
             fine_per_day = 10
-            
+
             result.append({
                 "member": borrow.member.full_name,
                 "book": borrow.book.title,

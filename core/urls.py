@@ -30,7 +30,7 @@ urlpatterns = [
     path('api/publisher/', include('publisher.api.urls')),
     path('api/book/', include('book.api.urls')),
     path('api/member/', include('member.api.urls')),
-
+    path('api/librarian/', include('librarian.api.urls')),
 
 
     # YOUR PATTERNS

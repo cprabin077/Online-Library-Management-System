@@ -35,3 +35,6 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
+    
+    class Meta:
+        db_table = "member"

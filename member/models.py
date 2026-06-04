@@ -13,7 +13,7 @@ class Member(models.Model):
 
     address = models.TextField(blank=True, null=True)
 
-    profile_image = models.ImageField(upload_to="member/members/", null=True, blank=True)
+    profile_image = models.ImageField(upload_to="member/profile_image/", null=True, blank=True)
 
     library_card_no = models.CharField(max_length=20, unique=True, blank=True)
 

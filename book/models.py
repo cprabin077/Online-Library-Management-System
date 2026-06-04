@@ -24,7 +24,7 @@ class Book(models.Model):
     available_copies = models.PositiveIntegerField(default=1)
 
     description = models.TextField(blank=True, null=True)
-    cover_image = models.ImageField(upload_to="books/", null=True, blank=True)
+    cover_image = models.ImageField(upload_to="book/cover_image/", null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
 

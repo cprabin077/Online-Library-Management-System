@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/book/', include('book.api.urls')),
     path('api/member/', include('member.api.urls')),
     path('api/librarian/', include('librarian.api.urls')),
+    path('api/borrow/', include('borrow.api.urls')),
 
 
     # YOUR PATTERNS

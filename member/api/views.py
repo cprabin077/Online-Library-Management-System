@@ -6,7 +6,7 @@ from member.models import Member
 from member.api.serializer import MemberSerializer
 
 class MemberView(GenericAPIView):
-
+    queryset = Member.objects.all()
     serializer_class = MemberSerializer
 
     def get(self, request):
@@ -39,15 +39,8 @@ class MemberView(GenericAPIView):
 
 # Member details view    
 class MemberDetailView(GenericAPIView):
-
+    queryset = Member.objects.all()
     serializer_class = MemberSerializer
-
-    def get(self, request, pk):
-
-        member = get_object_or_404(Member, id=pk)
-        serializer = MemberSerializer(member)
-
-        return Response(serializer.data, status=200)
 
     def put(self, request, pk):
 
@@ -85,6 +78,8 @@ class MemberDetailView(GenericAPIView):
 
 # member approve    
 class MemberApproveView(GenericAPIView):
+    # queryset = Member.objects.all()
+    # serializer_class = MemberSerializer
 
     def post(self, request, pk):
 

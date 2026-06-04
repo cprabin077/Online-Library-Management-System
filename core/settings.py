@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'librarian',
     'borrow',
     'subscription',
+    'membership',
 ]
 
 # drf_spectacular

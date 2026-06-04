@@ -35,11 +35,6 @@ class LibrarianUpdateAndDelete(GenericAPIView):
     queryset = Librarian.objects.all()
     serializer_class = LibrarianSerializer
 
-    def get(self, request, pk):
-        librarian = get_object_or_404(Librarian, id=pk)
-        serializer = LibrarianSerializer(librarian)
-        return Response(serializer.data, status=200)
-
     def put(self, request, pk):
         librarian = get_object_or_404(Librarian, id=pk)
         serializer = LibrarianSerializer(librarian, data=request.data, partial=True)

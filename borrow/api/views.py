@@ -10,7 +10,6 @@ from borrow.models import Borrow
 
 # BORROW BOOK API
 class BorrowView(GenericAPIView):
-
     queryset = Borrow.objects.all()
     serializer_class = BorrowSerializer
 
@@ -76,6 +75,8 @@ class BorrowView(GenericAPIView):
 
 # RETURN BOOK API (WITH FINE)
 class ReturnBookView(GenericAPIView):
+    queryset = Borrow.objects.all()
+    serializer_class = BorrowSerializer
 
     def post(self, request, pk):
         borrow = get_object_or_404(Borrow, id=pk)
@@ -110,6 +111,9 @@ class ReturnBookView(GenericAPIView):
 
 # OVERDUE BOOKS API
 class OverdueBooksView(GenericAPIView):
+    queryset = Borrow.objects.all()
+    serializer_class = BorrowSerializer
+
 
     def get(self, request):
 

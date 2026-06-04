@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/librarian/', include('librarian.api.urls')),
     path('api/borrow/', include('borrow.api.urls')),
     path('api/subscription/', include('subscription.api.urls')),
+    path('api/membership/', include('membership.api.urls')),
 
 
     # YOUR PATTERNS

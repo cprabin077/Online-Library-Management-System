@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/borrow/', include('borrow.api.urls')),
     path('api/subscription/', include('subscription.api.urls')),
     path('api/membership/', include('membership.api.urls')),
+     path('api/reservation/', include('reservation.api.urls')),
 
 
     # YOUR PATTERNS

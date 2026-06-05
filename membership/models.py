@@ -8,6 +8,7 @@ class Membership(models.Model):
         PENDING = "pending", "Pending"
         ACTIVE = "active", "Active"
         EXPIRED = "expired", "Expired"
+
     member = models.ForeignKey(
         "member.Member",
         on_delete=models.CASCADE,
@@ -30,6 +31,10 @@ class Membership(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+    class Meta:
+        db_table = "membership"
+
     def activate_membership(self):
         self.is_paid = True
         self.status = self.Status.ACTIVE
@@ -42,3 +47,5 @@ class Membership(models.Model):
 
     def __str__(self):
         return f"{self.member}"
+    
+

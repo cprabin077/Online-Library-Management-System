@@ -1,10 +1,10 @@
-# from django.urls import path
+from django.urls import path
 
-# from reservation.api.views import ReservationUpdateAndDelete, ReservationView
+from notification.api.views import NotificationReadView, NotificationUnreadCountView, NotificationView
 
+urlpatterns = [
+    path('', NotificationView.as_view(), name='notification'),
+    path("<int:pk>/read/", NotificationReadView.as_view(), name="notification-read"),
+    path("unread-count/", NotificationUnreadCountView.as_view(), name= "notification-unread-count"),
 
-
-# urlpatterns = [
-#     path('', ReservationView.as_view(), name='reservation'),
-#     path('<int:pk>', ReservationUpdateAndDelete.as_view(), name='reservation-update'),
-# ]
+]

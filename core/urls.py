@@ -25,6 +25,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/category/', include('category.api.urls')),
     path('api/author/', include('author.api.urls')),
     path('api/publisher/', include('publisher.api.urls')),
@@ -34,7 +35,8 @@ urlpatterns = [
     path('api/borrow/', include('borrow.api.urls')),
     path('api/subscription/', include('subscription.api.urls')),
     path('api/membership/', include('membership.api.urls')),
-     path('api/reservation/', include('reservation.api.urls')),
+    path('api/reservation/', include('reservation.api.urls')),
+    path('api/notification/', include('notification.api.urls')),
 
 
     # YOUR PATTERNS

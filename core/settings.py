@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'subscription',
     'membership',
     'reservation',
+    'notification',
 ]
 
 # drf_spectacular

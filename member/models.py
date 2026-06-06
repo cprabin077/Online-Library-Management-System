@@ -17,6 +17,18 @@ class Member(models.Model):
     library_card_no = models.CharField(max_length=20, unique=True, blank=True)
     qr_code = models.CharField(max_length=100, unique=True, blank=True)
 
+    subscription = models.ForeignKey(
+        "subscription.Subscription",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="members",
+    )
+
+    subscription_start = models.DateField(null=True, blank=True)
+
+    subscription_end = models.DateField(null=True, blank=True)
+
     is_active = models.BooleanField(default=False)
 
     joined_at = models.DateTimeField(auto_now_add=True)
@@ -35,6 +47,6 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
-    
+
     class Meta:
         db_table = "member"

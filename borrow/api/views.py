@@ -28,26 +28,34 @@ class BorrowView(GenericAPIView):
             book = serializer.validated_data["book"]
             issued_by = serializer.validated_data.get("issued_by")
 
-            # 🔐 MEMBER APPROVAL CHECK (FIXED)
+            #  MEMBER APPROVAL CHECK (FIXED)
             if not member.is_active:
                 return Response(
                     {"error": "Member is not active (not approved)"},
                     status=403
                 )
 
-            # 📚 LIMIT CHECK (MAX 3 BOOKS)
+            #  LIMIT CHECK (MAX 3 BOOKS)
             active_count = Borrow.objects.filter(
                 member=member,
                 is_returned=False
             ).count()
 
-            if active_count >= 3:
+            plan = member.subscription
+
+            if not plan:
                 return Response(
-                    {"error": "Member cannot borrow more than 3 books"},
+                    {"error": "No active subscription"},
                     status=400
                 )
 
-            # 📦 STOCK CHECK
+            if active_count >= plan.max_books:
+                return Response(
+                    {"error": "Borrow limit reached"},
+                    status=400
+                )
+
+            #  STOCK CHECK
             if book.available_copies <= 0:
                 return Response(
                     {"error": "Book not available"},
@@ -58,8 +66,10 @@ class BorrowView(GenericAPIView):
             book.available_copies -= 1
             book.save()
 
-            # 📅 due date
-            due_date = timezone.now().date() + timedelta(days=7)
+            #  due date
+            due_date = timezone.now().date() + timedelta(
+                days=plan.max_borrow_days
+            )
 
             serializer.save(
                 due_date=due_date,

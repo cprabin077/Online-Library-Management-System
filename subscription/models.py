@@ -2,12 +2,12 @@ from django.db import models
 
 
 class Subscription(models.Model):
+
     class PlanType(models.TextChoices):
         MONTHLY = "1m", "1 Month"
         THREE_MONTHS = "3m", "3 Months"
         SIX_MONTHS = "6m", "6 Months"
         TWELVE_MONTHS = "12m", "12 Months"
-
 
     plan_type = models.CharField(
         max_length=10,
@@ -15,12 +15,27 @@ class Subscription(models.Model):
         unique=True
     )
 
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration_days = models.PositiveIntegerField(blank=True, null=True)
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    duration_days = models.PositiveIntegerField(
+        blank=True,
+        null=True
+    )
+
+    # 🔥 LMS Rules
+    max_books = models.PositiveIntegerField(default=3)
+
+    max_borrow_days = models.PositiveIntegerField(default=7)
+
     is_active = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
+
         mapping = {
             "1m": 30,
             "3m": 90,

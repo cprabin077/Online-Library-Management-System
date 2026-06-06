@@ -19,4 +19,4 @@ class SubscriptionAdmin(admin.ModelAdmin):
     search_fields = ("plan_type",)
     ordering = ("duration_days",)
 
-    readonly_fields = ("created_at","duration_days",)
+    readonly_fields = ("created_at","duration_days","max_books", "max_borrow_days")

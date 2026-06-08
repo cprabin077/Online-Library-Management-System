@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'reservation',
     'notification',
     'payment',
+    'user',
 ]
 
 # drf_spectacular

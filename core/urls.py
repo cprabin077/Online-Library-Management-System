@@ -37,7 +37,9 @@ urlpatterns = [
     path('api/membership/', include('membership.api.urls')),
     path('api/reservation/', include('reservation.api.urls')),
     path('api/notification/', include('notification.api.urls')),
-     path('api/payment/', include('payment.api.urls')),
+    path('api/payment/', include('payment.api.urls')),
+
+    path('api/user/', include('user.api.urls')),
 
 
     # YOUR PATTERNS

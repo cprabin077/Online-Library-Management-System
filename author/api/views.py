@@ -23,7 +23,7 @@ class AuthorView(GenericAPIView):
         return Response(serializer.errors, 422)
 
 
-class AuthorUpdate(GenericAPIView):
+class AuthorUpdateAndDelete(GenericAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
@@ -35,3 +35,11 @@ class AuthorUpdate(GenericAPIView):
             serializer.save()
             return Response({"message": "Author successfully updated!!"}, 200)
         return Response(serializer.errors, 422)
+
+        # DELETE
+
+    def delete(self, request, pk):
+        author = Author.objects.filter(id=pk)
+        author.delete()
+
+        return Response({"message": "Author successfully deleted!!"}, 200)
